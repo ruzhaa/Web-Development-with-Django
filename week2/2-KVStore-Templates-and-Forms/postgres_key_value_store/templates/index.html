@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="utf-8">
+	<title>Key Value Store</title>
+</head>
+
+<body>
+	<p>Total number of users: {{ total_number }}</p>
+	<p>Total number of keys stored in our database: {{ total_keys }}</p>
+
+	<table>
+		<thead>
+			<tr>
+				<th>User identifier</th>
+				<th>Created at</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.identifier }}</td>
+					<td>{{ user.created_at }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
