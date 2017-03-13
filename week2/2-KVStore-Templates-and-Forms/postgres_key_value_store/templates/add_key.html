@@ -6,7 +6,8 @@
 </head>
 
 <body>
-	<form method="POST" action="">
+	{% url 'userdetail' identifier as user_detail %}
+	<form method="POST" action="{{ user_detail }}">
 		<label>Key:
 		  <input type="text" name="key">
 		</label>

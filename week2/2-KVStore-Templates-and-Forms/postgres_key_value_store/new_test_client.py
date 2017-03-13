@@ -20,7 +20,6 @@ ADD_KEY_VIEW = '/add-key/{identifier}/'
 TIMEOUT = 2
 
 
-
 def is_uuid4(value):
     return UUID4_REGEX.match(value)
 
