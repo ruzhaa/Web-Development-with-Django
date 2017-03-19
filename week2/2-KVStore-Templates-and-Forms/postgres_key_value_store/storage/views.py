@@ -1,7 +1,6 @@
-import json
-
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.urls import reverse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .exceptions import UserDoesNotExist
 from .services import (
     count_users,
@@ -44,4 +43,6 @@ def add_key(request, identifier):
                 'error': 'User not found'
             }
             return HttpResponse(error, status=404)
+        url = reverse('user-detail', kwargs={'identifier': identifier})
+        return redirect(url)
     return render(request, 'add_key.html')

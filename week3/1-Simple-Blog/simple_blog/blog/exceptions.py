@@ -1,0 +1,2 @@
+class TitleAlreadyExist(Exception):
+    pass

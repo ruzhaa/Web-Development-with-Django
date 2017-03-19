@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create new post</title>
+</head>
+<body>
+	<form method="POST" action="">
+	{% csrf_token %}
+		<label>Title:
+			<input type="text" name="title">
+		</label>
+		<label>Content:
+	    	<input type="text" name="content">
+		</label>
+		<label>Tags (tag, tag, ...)
+			<input type="text" name="tags">
+		</label>
+		<input type="submit" value="Add">
+	</form>
+</body>
+</html>

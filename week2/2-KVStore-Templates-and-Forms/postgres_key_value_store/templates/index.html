@@ -19,7 +19,7 @@
 		<tbody>
 			{% for user in users %}
 				<tr>
-					<td><a href="{% url 'userdetail' user.identifier %}">{{ user.identifier }}</a></td>
+					<td><a href="{% url 'user-detail' user.identifier %}">{{ user.identifier }}</a></td>
 					<td>{{ user.created_at }}</td>
 				</tr>
 			{% endfor %}

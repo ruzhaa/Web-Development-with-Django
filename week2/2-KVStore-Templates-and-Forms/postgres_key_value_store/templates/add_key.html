@@ -6,15 +6,15 @@
 </head>
 
 <body>
-	{% url 'userdetail' identifier as user_detail %}
-	<form method="POST" action="{{ user_detail }}">
+	<!-- {% url 'user-detail' identifier as user_detail %} -->
+	<form method="POST" action="">
 		<label>Key:
-		  <input type="text" name="key">
+			<input type="text" name="key">
 		</label>
 		<label>Value:
-	    <input type="text" name="value">
-	  </label>
-	  <input type="submit" value="Add">
+			<input type="text" name="value">
+		</label>
+		<input type="submit" value="Add">
 	</form>
 </body>
 </html>

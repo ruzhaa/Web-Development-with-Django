@@ -7,7 +7,7 @@
 
 <body>
 	<p>Details for user <b>{{ user.identifier }}</b></p>
-	{% url 'addkey' user.identifier as add_key_url %}
+	{% url 'add-key' user.identifier as add_key_url %}
 	<button><a href="{{ add_key_url}}">Add key</a></button>
 	<table>
 		<thead>
