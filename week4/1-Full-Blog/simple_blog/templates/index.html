@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Blog posts
+{% endblock %}
+
+{% block content %}
+	<table border="1">
+		<thead>
+			<tr>
+				<td>Title</td>
+				<td>Create Data</td>
+				<td>Update Data</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in blog_posts %}
+			<tr>
+				<td><a href="{% url 'show-post' post.title %}">{{ post.title }}</a></td>
+				<td>{{ post.created_date }}</td>
+				<td>{{ post.updated_date }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<button><a href="{% url 'create-new-post' %}">Create new post</a></button>
+{% endblock %}
