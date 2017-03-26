@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static%}
+{% block title %}
+Create new blog post
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<section class="content">
+  <div class="container">
+		<div class="row">
+			<div class="post-content post-modern col-md-9">
+				{% if alert %}
+				<div role="alert" class="alert alert-success">
+					{{ alert }}
+				</div>
+				<a href="{% url 'index' %}" class="btn btn-primary">View all posts</a>
+				{% else %}
+				<div class="hr-title hr-long center"><abbr>Create your blog post</abbr> </div>
+				<form class="form-gray-fields" action="" method="POST">
+					{% csrf_token %}
+					{% for field in form.fields %}
+	      		<div class="form-group">
+	      			<label for="id_{{ field }}" class="upper">{{ field }}:</label>
+	      			<input id="id_{{ field }}" type="" name="{{ field }}" class="form-control required">
+	      		</div>
+	      	{% endfor %}
+					<button id="form-submit" class="btn btn-primary" type="submit">Create post</button>
+				</form>
+				{% endif %}
+			</div>
+			<div class="sidebar col-md-3">
+				<div class="widget clearfix widget-tags">
+			    <h4 class="widget-title">Tags</h4>
+			    <div class="tags">
+			    	{% for tag in all_tags %}
+			        <a href="#">{{tag}}</a>
+			      {% endfor %}
+			    </div>
+			  </div>	
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

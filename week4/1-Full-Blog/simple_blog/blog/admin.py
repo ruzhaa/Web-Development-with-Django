@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Tags
+from .models import BlogPost, Tags, Comment
 
 
 @admin.register(BlogPost)
@@ -11,3 +11,8 @@ class BlogPostAdmin(admin.ModelAdmin):
 @admin.register(Tags)
 class TagsAdmin(admin.ModelAdmin):
     list_display = ('tag', )
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('author_email', 'created_date', 'content', 'blog_post')

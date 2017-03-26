@@ -1,0 +1,15 @@
+{
+  "name": "bower.json",
+  "homepage": "https://github.com/ruzhaa/Web-Development-with-Django",
+  "authors": [
+    "ruzhaa <ruzha_bobotanova@abv.bg>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0"
+  }
+}

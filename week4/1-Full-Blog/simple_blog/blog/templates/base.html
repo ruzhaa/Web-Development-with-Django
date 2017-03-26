@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>
+		{% block title %}
+		{% endblock %}
+	</title>
+
+	{% block links %}
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
+
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
+
+    <link href="{% static 'blog/css/theme-base.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/theme-elements.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/color-variations/blue.css' %}" rel="stylesheet" type="text/css" media="screen" title="blue">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/custom.css' %}" media="screen" />
+    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+    {% endblock %}
+
+</head>
+<style type="text/css">
+	{% block style %}
+	{% endblock %}
+</style>
+<body>
+{% block content %}
+<header id="header" class="header-mini header-dark">
+	<div id="header-wrap">
+		<div class="container">
+			<div id="logo">
+				<a href="{% url 'index' %}" class="logo"><img src="{% static 'blog/images/logo-dark.png' %}"></a>
+			</div>
+			<div class="nav-main-menu-responsive">
+				<button class="lines-button x">
+					<span class="lines"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse main-menu-collapse navigation-wrap">
+				<div class="container">
+					<nav class="main-menu mega-menu" id="mainMenu">
+						<ul class="main-menu nav nav-pills">
+							<li><a href="{% url 'index' %}"><i class="fa fa-home"></i></a></li>
+							<li><a href="{% url 'index' %}">blog</a></li>
+							<li><a href="{% url 'create-new-post' %}">Create blog</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+{% endblock %}
+<footer>
+	{% block footer %}
+	{% endblock %}
+</footer>
+{% block scripts %}
+    <script src="{% static 'blog/js/theme-functions.js' %}"></script>
+{% endblock %}
+</body>
+</html>
