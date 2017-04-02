@@ -11,12 +11,6 @@ Create new blog post
   <div class="container">
 		<div class="row">
 			<div class="post-content post-modern col-md-9">
-				{% if alert %}
-				<div role="alert" class="alert alert-success">
-					{{ alert }}
-				</div>
-				<a href="{% url 'index' %}" class="btn btn-primary">View all posts</a>
-				{% else %}
 				<div class="hr-title hr-long center"><abbr>Create your blog post</abbr> </div>
 				<form action="" method="POST">
 					{% csrf_token %}
@@ -28,7 +22,6 @@ Create new blog post
 	      	{% endfor %}
 					<button id="form-submit" class="btn btn-primary" type="submit">Create post</button>
 				</form>
-				{% endif %}
 			</div>
 			<div class="sidebar col-md-3">
 				<div class="widget clearfix widget-tags">

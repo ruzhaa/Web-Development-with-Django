@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static%}
+{% block title %}
+Login page
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<section class="content">
+  <div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel">
+					{% if alert %}
+						<div role="alert" class="alert alert-danger">
+							{{ alert }}
+						</div>
+					{% else %}
+	  				<h3>Login</h3>
+						<form action="" method="POST">
+							{% csrf_token %}
+							{% for field in form.fields %}
+								<div class="form-group">
+			      			<label for="id_{{ field }}">{{ field }}:</label>
+			      			<input id="id_{{ field }}" type="{{ field}}" name="{{ field }}" class="form-control input-lg required" required>
+			      		</div>
+			      	{% endfor %}
+							<div class="form-group">
+								<button class="btn btn-primary" type="submit">Login</button>
+							</div>
+						</form>
+					{% endif %}
+				</div>
+				<p>Don't have an account yet? <a href="{% url 'registration-view' %}">Register New Account</a></p>
+			</div>
+	  </div>
+	</div>
+</section>
+{% endblock %}

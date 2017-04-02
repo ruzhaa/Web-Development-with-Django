@@ -1,2 +1,0 @@
-class TitleAlreadyExist(Exception):
-    pass

@@ -9,10 +9,9 @@ class RegistrationForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
 
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password']
+class LoginForm(forms.Form):
+    username = forms.CharField(label="username")
+    password = forms.CharField(widget=forms.PasswordInput())
 
 
 class BlogPostModelForm(forms.ModelForm):
@@ -22,7 +21,6 @@ class BlogPostModelForm(forms.ModelForm):
 
 
 class BlogPostForm(forms.Form):
-    author = forms.CharField(label="Author")
     title = forms.CharField(label="Title", max_length=255)
     content = forms.CharField(widget=forms.Textarea)
     tags = forms.CharField(label="Tags")

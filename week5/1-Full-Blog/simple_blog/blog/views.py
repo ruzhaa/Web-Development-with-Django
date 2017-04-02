@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
+# from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import BlogPost, Comment, Tags
-from .forms import BlogPostForm, CommentsForm, RegistrationForm
+from .forms import BlogPostForm, CommentsForm, RegistrationForm, LoginForm
 from .services import create_blog_post
 from django.utils import timezone
 
@@ -13,7 +14,10 @@ from django.utils import timezone
 def index(request):
     all_tags = Tags.objects.all()
     try:
-        blog_posts = BlogPost.objects.all()
+        if request.user.is_authenticated:
+            blog_posts = BlogPost.objects.get_private_posts()
+        else:
+            blog_posts = BlogPost.objects.get_public_posts()
     except BlogPost.DoesNotExist:
         return HttpResponse(status=404)
     return render(request, 'index.html', locals())
@@ -23,8 +27,7 @@ def show_post(request, title):
     form = CommentsForm()
 
     post = BlogPost.objects.filter(title=title).first()
-    comments = Comment.objects.filter(blog_post=post)
-    comments_count = comments.count()
+    comments_count = Comment.objects.filter(blog_post=post).count()
 
     if request.method == 'POST':
         form = CommentsForm(data=request.POST)
@@ -37,6 +40,7 @@ def show_post(request, title):
     return render(request, 'show_post.html', locals())
 
 
+@login_required(login_url=reverse_lazy('login-view'))
 def create_new_post(request):
     all_tags = Tags.objects.all()
     form = BlogPostForm()
@@ -44,15 +48,20 @@ def create_new_post(request):
     if request.method == 'POST':
         form = BlogPostForm(data=request.POST)
         if form.is_valid():
-            post = create_blog_post(**form.cleaned_data)
-            alert = "Well done! You successfully create new blog post."
-            return render(request, 'create_new_post.html', {'alert': alert})
+            post = create_blog_post(author=request.user.username,
+                                    title=form.cleaned_data.get('title'),
+                                    content=form.cleaned_data.get('content'),
+                                    tags=form.cleaned_data.get('content'))
+            return redirect(reverse(index))
     return render(request, 'create_new_post.html', locals())
 
 
 def registration_view(request):
     all_tags = Tags.objects.all()
     form = RegistrationForm()
+
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
 
     if request.method == "POST":
         form = RegistrationForm(data=request.POST)
@@ -68,10 +77,13 @@ def registration_view(request):
 
 
 def login_view(request):
-    form = AuthenticationForm()
+    form = LoginForm()
+
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
 
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']

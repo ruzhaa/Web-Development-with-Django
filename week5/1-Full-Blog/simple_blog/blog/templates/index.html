@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}
+List of blog posts
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<section class="p-t-40">
+	<div class="container">
+		<div class="row">
+			<div class="post-content post-modern col-md-9">
+			{% for post in blog_posts %}
+				<div class="post-item">
+					<!-- <div class="post-image">
+						<a href="{% url 'show-post' post.title %}">
+							<img alt="" src="{% static 'blog/images/1.jpg' %}">
+						</a>
+					</div> -->
+					<div class="post-content-details">
+						<div class="post-title">
+							<h3><a href="{% url 'show-post' post.title %}">{{ post.title }}</a></h3>
+						</div>
+						<div class="post-info">
+							<span class="post-autor">Post by: 
+							{% for author in post.authors.all %}
+								{{ author }}, 
+							{% endfor %}
+							</span>
+						</div>
+						<div class="post-description">
+							<p></p>
+
+							<div class="post-read-more">
+								<a class="read-more" href="{% url 'show-post' post.title %}">read more <i class="fa fa-long-arrow-right"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="post-meta">
+						<div class="post-date">{{ post.created_date|date:"N d Y" }}</div>
+
+						<div class="post-comments">
+							<a href="#">
+								<i class="fa fa-comments-o"></i>
+								<span class="post-comments-number">{{ post.data.count }}</span>
+							</a>
+						</div>
+					</div>
+				</div><!-- End .post-item -->
+			{% endfor %}
+			</div>
+			<div class="sidebar col-md-3">
+				<div class="widget clearfix widget-tags">
+			    <h4 class="widget-title">Tags</h4>
+			    <div class="tags">
+			    	{% for tag in all_tags %}
+			        <a href="#">{{ tag }}</a>
+			      {% endfor %}
+			    </div>
+			  </div>	
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

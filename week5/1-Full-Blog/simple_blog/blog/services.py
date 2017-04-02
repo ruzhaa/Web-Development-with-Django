@@ -27,7 +27,7 @@ def check_and_add_author(new_post, author):
 
 
 def create_blog_post(*, author, title, content, tags=None):
-    post = BlogPost.objects.create(title=title, content=content)
+    post = BlogPost.objects.create(title=title, content=content, is_private=True)
     post = check_and_add_tags(post, tags)
     post = check_and_add_author(post, author)
 
