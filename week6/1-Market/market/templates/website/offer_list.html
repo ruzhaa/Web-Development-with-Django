@@ -1,0 +1,35 @@
+{% extends "website/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}All offers{% endblock %}
+
+{% block style %}
+	.box { background-color: #e6e6e6; padding: 20px 10px; margin-bottom: 15px; }
+	.offer-chars span { font-weight: 700; }
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	{% for offer in object_list %}
+	<div class="box">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-md-4"><img src="/media/{{ offer.image }}" class="img-responsive" /></div>
+				<div class="col-md-4">
+					<p>{{ offer.title }} - {{ offer.price }}</p>
+					<p class="offer-chars"><span>Author: </span>{{ offer.author }}</p>
+					<p class="offer-chars"><span>Category: </span>{{ offer.category }}</p>
+					<p class="offer-chars"><span>From: </span>{{ offer.created_date }}</p>
+				</div>
+				<div class="col-md-4">
+					<a href="{% url 'offer-view' offer.id %}" class="btn btn-success">View</a>
+					<a href="{% url 'edit-offer' offer.id %}" class="btn btn-info">Edit</a>
+					<a href="{% url 'delete-offer' offer.id %}" class="btn btn-danger">Remove</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
