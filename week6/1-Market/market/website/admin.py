@@ -10,4 +10,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Offer)
 class OfferAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'price', 'category', 'description', 'author', 'created_date')
+    list_display = ('id', 'title', 'price', 'category', 'description', 'author', 'created_date', 'status')

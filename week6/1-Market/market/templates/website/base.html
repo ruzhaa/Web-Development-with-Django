@@ -25,13 +25,13 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li><a href="{% url 'index' %}">All offers</a></li>
-      <li><a href="{% url 'add-offer' %}">Add offer</a></li>
+      <li><a href="{% url 'website:index' %}">All offers</a></li>
+      <li><a href="{% url 'website:add-offer' %}">Add offer</a></li>
       {% if request.user.is_authenticated %}
-			<li><a href="{% url 'logout' %}">Logout</a></li>
+			<li><a href="{% url 'website:logout' %}">Logout</a></li>
 			{% else %}
-			<li><a href="{% url 'login' %}">Login</a></li>
-			<li><a href="{% url 'registration-view' %}">Registration</a></li>
+			<li><a href="{% url 'website:login' %}">Login</a></li>
+			<li><a href="{% url 'website:registration-view' %}">Registration</a></li>
 			{% endif %}
     </ul>
   </div>

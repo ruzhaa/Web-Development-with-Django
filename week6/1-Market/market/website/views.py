@@ -3,16 +3,31 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import RegistrationForm
-from .models import Offer
 
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
+from .forms import RegistrationForm
+from .models import Offer
+
 
 class OfferListView(ListView):
     model = Offer
+    queryset = Offer.objects.get_approved_offers()
+    template_name = 'website/offer_list.html'
+
+
+class PendingListView(ListView):
+    model = Offer
+    queryset = Offer.objects.get_pending_offers()
+    template_name = 'website/offer_list.html'
+
+
+class ApprovedAndRejectedListView(ListView):
+    model = Offer
+    queryset = Offer.objects.get_approved_and_rejected_offers()
+    template_name = 'website/offer_list.html'
 
 
 class CreateOfferView(LoginRequiredMixin, CreateView):
@@ -25,7 +40,7 @@ class CreateOfferView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('index')
+        return reverse_lazy('website:index')
 
 
 class UpdateOfferView(LoginRequiredMixin, UpdateView):
@@ -38,7 +53,7 @@ class UpdateOfferView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('index')
+        return reverse_lazy('website:index')
 
 
 class OfferView(DetailView):
@@ -50,7 +65,7 @@ class OfferDeleteView(DeleteView):
     model = Offer
 
     def get_success_url(self):
-        return reverse_lazy('index')
+        return reverse_lazy('website:index')
 
 
 def registration_view(request):

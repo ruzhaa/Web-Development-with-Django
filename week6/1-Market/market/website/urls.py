@@ -1,15 +1,21 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
-from .my_views import (
-    index,
-    add_offer,
-    registration_view,
-)
+from .my_views import registration_view
 
-from .views import OfferListView, CreateOfferView, UpdateOfferView, OfferView, OfferDeleteView
+from .views import (
+    OfferListView,
+    CreateOfferView,
+    UpdateOfferView,
+    OfferView,
+    OfferDeleteView,
+    PendingListView,
+    ApprovedAndRejectedListView
+)
 
 urlpatterns = [
     url(r'^$', OfferListView.as_view(), name='index'),
+    url(r'^pending-offers', PendingListView.as_view(), name='pending-offers'),
+    url(r'^approved-rejected', ApprovedAndRejectedListView.as_view(), name='pending-offers'),
     url(r'^add-offer', CreateOfferView.as_view(), name='add-offer'),
     url(r'^offer/edit/(?P<pk>[0-9]+)', UpdateOfferView.as_view(), name='edit-offer'),
     url(r'^offer/(?P<pk>[0-9]+)', OfferView.as_view(), name='offer-view'),

@@ -22,9 +22,9 @@
 					<p class="offer-chars"><span>From: </span>{{ offer.created_date }}</p>
 				</div>
 				<div class="col-md-4">
-					<a href="{% url 'offer-view' offer.id %}" class="btn btn-success">View</a>
-					<a href="{% url 'edit-offer' offer.id %}" class="btn btn-info">Edit</a>
-					<a href="{% url 'delete-offer' offer.id %}" class="btn btn-danger">Remove</a>
+					<a href="{% url 'website:offer-view' offer.id %}" class="btn btn-success">View</a>
+					<a href="{% url 'website:edit-offer' offer.id %}" class="btn btn-info">Edit</a>
+					<a href="{% url 'website:delete-offer' offer.id %}" class="btn btn-danger">Remove</a>
 				</div>
 			</div>
 		</div>
