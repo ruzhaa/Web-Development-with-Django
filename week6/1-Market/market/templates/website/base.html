@@ -26,6 +26,8 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li><a href="{% url 'website:index' %}">All offers</a></li>
+  		<li><a href="{% url 'website:pending-offers' %}">All pending offers</a></li>
+  		<li><a href="{% url 'website:approved-rejected' %}">All approved and reject offers</a></li>
       <li><a href="{% url 'website:add-offer' %}">Add offer</a></li>
       {% if request.user.is_authenticated %}
 			<li><a href="{% url 'website:logout' %}">Logout</a></li>

@@ -19,7 +19,7 @@ class CanUpdateOfferMixin(BaseUserPassesTestMixin):
         return True and super().test_func()
 
 
-class IsSuperMixin(BaseUserPassesTestMixin):
+class IsSuperUserMixin(BaseUserPassesTestMixin):
 
     raise_exception = True
 
